@@ -9,29 +9,50 @@
     font-family: Arial, sans-serif;
     background: linear-gradient(to right, #a1c4fd, #c2e9fb);
     text-align: center;
-    padding: 50px;
+    padding: 20px;
+    margin: 0;
   }
   .payment-box {
     background: #fff;
-    padding: 30px;
+    padding: 25px;
     border-radius: 20px;
     display: inline-block;
+    max-width: 400px;
+    width: 100%;
     box-shadow: 0 4px 20px rgba(0,0,0,0.2);
   }
-  h1 { color: #2c3e50; }
-  h2 { color: #e74c3c; margin-bottom: 25px; }
+  h1 {
+    color: #2c3e50;
+    font-size: clamp(1.5em, 5vw, 2em);
+    margin-bottom: 10px;
+  }
+  h2 {
+    color: #e74c3c;
+    margin: 15px 0 25px 0;
+    font-size: clamp(1.2em, 4vw, 1.5em);
+  }
   .pay-option {
-    margin: 20px;
-    padding: 15px;
-    font-size: 18px;
+    margin: 10px 0;
+    padding: 14px;
+    width: 100%;
+    font-size: 1em;
     background: #27ae60;
     color: white;
     border: none;
     border-radius: 10px;
     cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
   }
-  .pay-option:hover { background: #219150; }
-  img { margin-top: 20px; width: 200px; display: none; }
+  .pay-option:hover {
+    background: #219150;
+    transform: scale(1.05);
+  }
+  #qrCode {
+    margin-top: 20px;
+    width: 200px;
+    max-width: 80%;
+    display: none;
+  }
 </style>
 </head>
 <body>
@@ -43,30 +64,34 @@
 
   <button class="pay-option" onclick="payQR()">Pay via QR Code</button>
   <button class="pay-option" onclick="payCash()">Cash</button>
-  <br>
+
   <img id="qrCode" src="QR code.png" alt="QR Code">
   <audio id="beep" src="beep.mp3"></audio>
 </div>
 
 <script>
-  // Function to extract query parameters
+  // Get query parameter
   function getQueryParam(param) {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(param);
   }
 
-  // Display the amount
+  // Show amount from URL
   const totalAmount = getQueryParam("amount"); 
   if (totalAmount) {
     document.getElementById("amountDisplay").textContent = "Amount: ₹" + totalAmount;
   }
 
+  // Show QR code
   function payQR() {
     document.getElementById("qrCode").style.display = "block";
+    alert("📱 Scan the QR code to complete your payment!");
   }
+
+  // Cash option
   function payCash() {
     document.getElementById("beep").play();
-    alert("Please pay cash at the counter 💵");
+    alert("💵 Please pay cash at the counter. Thank you!");
   }
 </script>
 
