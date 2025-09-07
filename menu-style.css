@@ -12,18 +12,20 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap; /* lets nav wrap on small screens */
+  gap: 10px;
   padding: 15px 20px;
   color: white;
   box-shadow: 0 4px 6px rgba(0,0,0,0.3);
 }
 
 .navbar .hotel-name {
-  font-size: 1.5em;
+  font-size: clamp(1.2em, 4vw, 1.5em);
   font-weight: bold;
 }
 
 .category-section {
-  padding: 25px;
+  padding: 20px;
   margin: 20px auto;
   max-width: 900px;
   border-radius: 15px;
@@ -31,7 +33,21 @@ body {
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
+.category-section h2 {
+  font-size: clamp(1.3em, 4vw, 1.8em);
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.items-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
 .dish {
+  flex: 1 1 calc(50% - 15px);
+  box-sizing: border-box;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -39,11 +55,28 @@ body {
   margin-bottom: 10px;
   background: rgba(255,255,255,0.7);
   border-radius: 10px;
+  font-size: clamp(0.9em, 2.5vw, 1em);
+}
+
+.dish input[type="number"] {
+  width: 60px;
+  padding: 8px;
+  border-radius: 12px;
+  border: 2px solid #ff9800;
+  text-align: center;
+  font-weight: bold;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.dish input[type="number"]:focus {
+  border-color: #e68900;
+  box-shadow: 0 0 5px rgba(255,152,0,0.5);
 }
 
 .order-btn {
   padding: 12px 28px;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
   color: white;
   background: linear-gradient(45deg, #ff6a00, #ee0979);
@@ -60,7 +93,7 @@ body {
 
 .home-btn {
   padding: 10px 20px;
-  background-color: #ff9800;  /* Choose any color you like */
+  background-color: #ff9800;
   color: white;
   text-decoration: none;
   font-weight: bold;
@@ -73,30 +106,28 @@ body {
   transform: scale(1.05);
 }
 
+/* 📱 Mobile responsiveness */
+@media (max-width: 600px) {
+  .dish {
+    flex: 1 1 100%; /* stack dishes full-width */
+  }
 
-.items-container {
-  display: flex;
-  flex-wrap: wrap;      /* allows dishes to wrap to next line */
-  gap: 15px;            /* space between dishes */
-}
+  .order-btn, .home-btn {
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+    font-size: 1em;
+  }
 
-.dish {
-  flex: 1 1 calc(50% - 15px);  /* take roughly 50% width minus gap */
-  box-sizing: border-box;       /* include padding/border in width */
-}
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
-.dish input[type="number"] {
-  width: 60px;                /* adjust width */
-  padding: 8px;               /* inner spacing */
-  border-radius: 12px;        /* rounded corners */
-  border: 2px solid #ff9800;  /* cute colored border */
-  text-align: center;          /* center the number */
-  font-weight: bold;
-  outline: none;
-  transition: all 0.2s;
-}
-
-.dish input[type="number"]:focus {
-  border-color: #e68900;      /* darker border on focus */
-  box-shadow: 0 0 5px rgba(255,152,0,0.5);
+  .nav-links {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
 }
