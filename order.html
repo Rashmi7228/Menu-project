@@ -3,153 +3,104 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Order Summary</title>
+<title>Payment</title>
 <style>
   body {
     font-family: Arial, sans-serif;
-    background: linear-gradient(to right, #ffecd2, #fcb69f);
-    margin: 0;
-    padding: 0;
+    background: linear-gradient(to right, #a1c4fd, #c2e9fb);
     text-align: center;
+    padding: 20px;
+    margin: 0;
   }
-  .order-box {
+
+  .payment-box {
     background: #fff;
-    margin: 40px auto;
-    padding: 30px;
-    width: 500px;
+    padding: 25px;
     border-radius: 20px;
+    display: inline-block;
+    max-width: 400px;
+    width: 100%;
     box-shadow: 0 4px 20px rgba(0,0,0,0.2);
   }
-  h1 { color: #e74c3c; }
-  .timer {
-    font-size: 1.5em;
+
+  h1 {
+    color: #2c3e50;
+    font-size: clamp(1.5em, 5vw, 2em);
+    margin-bottom: 10px;
+  }
+
+  h2 {
+    color: #e74c3c;
+    margin: 15px 0 25px 0;
+    font-size: clamp(1.2em, 4vw, 1.5em);
+  }
+
+  .pay-option {
+    margin: 10px 0;
+    padding: 14px;
+    width: 100%;
+    font-size: 1em;
+    background: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+  }
+  .pay-option:hover {
+    background: #219150;
+    transform: scale(1.05);
+  }
+
+  #qrCode {
+    margin-top: 20px;
+    width: 200px;
+    max-width: 80%;
+    display: none;
+  }
+
+  .success-msg {
+    margin-top: 20px;
+    font-size: 1.1em;
     font-weight: bold;
     color: #27ae60;
-    margin: 20px 0;
-  }
-  .order-btn {
-    display: inline-block;
-    padding: 12px 24px;
-    background: #27ae60;
-    color: #fff;
-    font-weight: bold;
-    border-radius: 8px;
-    text-decoration: none;
-    margin-top: 20px;
-    cursor: pointer;
-  }
-  .order-btn:hover { background: #219150; }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
-  }
-  table, th, td {
-    border: 1px solid #ddd;
-  }
-  th, td {
-    padding: 10px;
-  }
-  input[type="number"] {
-    width: 60px;
-    text-align: center;
+    display: none;
   }
 </style>
 </head>
 <body>
 
-<div class="order-box">
-  <h1>🧾 Order Summary</h1>
-  <div class="timer">⏳ Time Left: <span id="countdown">02:00</span></div>
-  
-  <table id="orderTable">
-    <thead>
-      <tr>
-        <th>Dish</th>
-        <th>Qty</th>
-        <th>Price</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
-  <h2>Total: ₹<span id="totalAmount">0</span></h2>
+<div class="payment-box">
+  <h1>💳 Select Payment Method</h1>
+  <h2 id="amountDisplay">Amount: ₹0</h2>
 
-  <button id="updateOrderBtn" class="order-btn">Update Order</button>
-  <a href="payment.html" class="order-btn" id="confirmBtn">Confirm Now</a>
+  <button class="pay-option" onclick="payQR()">Pay via QR Code</button>
+  <button class="pay-option" onclick="payCash()">Cash</button>
+
+  <img id="qrCode" src="QR code.png" alt="QR Code">
+  <div id="cashMsg" class="success-msg">💵 Please pay at the counter</div>
+
+  <audio id="beep" src="beep.mp3"></audio>
 </div>
 
 <script>
-const prices = {
-  "Idli": 20, "Dosa": 40, "Poori_with_Bhaji": 50, "Upma": 35, "Pongal": 45, "Vegetable_Sandwich": 40,
-  "Veg_Biryani": 120, "Paneer_Butter_Masala": 150, "Dal_Tadka": 90, "Aloo_Gobi": 100, "Veg_Thali": 180, "Chole_Bhature": 120,
-  "Samosa": 20, "Paneer_Pakora": 25, "Veg_Sandwich": 40, "Cutlet": 30, "Bhel_Puri": 35, "Pani_Puri": 30,
-  "Buttermilk": 25, "Lassi": 40, "Masala_Chai": 20, "Lemon_Tea": 25, "Green_Tea": 30, "Cold_Coffee": 50,
-  "Orange_Juice": 30, "Apple_Juice": 30, "Pineapple_Juice": 35, "Watermelon_Juice": 30, "Mosambi_Juice": 30, "Mango_Juice": 35,
-  "Ice_Cream": 60, "Brownie": 70, "Gulab_Jamun": 50, "Rasgulla": 45, "Kaju_Katli": 80, "Carrot_Halwa": 90
-};
-
-const params = new URLSearchParams(window.location.search);
-let tbody = document.querySelector("#orderTable tbody");
-let totalEl = document.getElementById("totalAmount");
-
-// render initial table
-function renderOrder() {
-  tbody.innerHTML = "";
-  let total = 0;
-  for (let [dish, qty] of params.entries()) {
-    qty = parseInt(qty);
-    if (qty > 0 && prices[dish]) {
-      let displayName = dish.replace(/_/g, " ");
-      let row = document.createElement("tr");
-      row.innerHTML = `
-        <td>${displayName}</td>
-        <td><input type="number" min="0" value="${qty}" data-dish="${dish}"></td>
-        <td class="price">₹${prices[dish] * qty}</td>
-      `;
-      tbody.appendChild(row);
-      total += prices[dish] * qty;
-    }
+  // Display amount from order page
+  const urlParams = new URLSearchParams(window.location.search);
+  const totalAmount = urlParams.get("amount");
+  if (totalAmount) {
+    document.getElementById("amountDisplay").textContent = "Amount: ₹" + totalAmount;
   }
-  totalEl.textContent = total;
-}
 
-renderOrder();
-
-// update order
-document.getElementById("updateOrderBtn").addEventListener("click", () => {
-  let inputs = tbody.querySelectorAll("input");
-  let newTotal = 0;
-  inputs.forEach(inp => {
-    let dish = inp.dataset.dish;
-    let qty = parseInt(inp.value);
-    if (qty > 0) {
-      inp.closest("tr").querySelector(".price").textContent = `₹${prices[dish] * qty}`;
-      newTotal += prices[dish] * qty;
-      params.set(dish, qty);
-    } else {
-      inp.closest("tr").remove();
-      params.delete(dish);
-    }
-  });
-  totalEl.textContent = newTotal;
-});
-
-// countdown timer
-let time = 120; // 2 minutes
-let countdownEl = document.getElementById("countdown");
-let timer = setInterval(() => {
-  let minutes = Math.floor(time / 60);
-  let seconds = time % 60;
-  countdownEl.textContent = `${minutes.toString().padStart(2,"0")}:${seconds.toString().padStart(2,"0")}`;
-  time--;
-
-  if (time < 0) {
-    clearInterval(timer);
-    document.querySelectorAll("input, #updateOrderBtn").forEach(el => el.disabled = true);
-    alert("✅ Order Confirmed! Redirecting to payment...");
-    window.location.href = "payment.html";
+  function payQR() {
+    document.getElementById("qrCode").style.display = "block";
+    document.getElementById("cashMsg").style.display = "none";
   }
-}, 1000);
+
+  function payCash() {
+    document.getElementById("cashMsg").style.display = "block";
+    document.getElementById("qrCode").style.display = "none";
+    document.getElementById("beep").play(); // play beep sound
+  }
 </script>
 
 </body>
