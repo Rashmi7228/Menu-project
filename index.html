@@ -18,19 +18,23 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh; /* flexible height */
+    padding: 20px;     /* prevents content from touching screen edges */
+    box-sizing: border-box;
   }
 
   .home-content {
     background: #fff;
-    padding: 90px;
+    padding: 5vw; /* responsive padding instead of fixed 90px */
     border-radius: 20px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.2);
     max-width: 500px;
+    width: 100%;  /* makes it shrink on small screens */
   }
 
   .logo {
-    width: 250px;
+    width: 60%; /* scales based on screen size */
+    max-width: 250px;
     height: auto;
     border: 3px solid #f39c12;
     border-radius: 15px;
@@ -40,12 +44,12 @@
   }
 
   h1 {
-    font-size: 2em;
+    font-size: clamp(1.5em, 4vw, 2em); /* auto scales */
     color: #e74c3c;
   }
 
   p {
-    font-size: 1.1em;
+    font-size: clamp(1em, 2.5vw, 1.1em);
     color: #555;
     margin: 20px 0;
   }
@@ -64,6 +68,17 @@
 
   .order-btn:hover {
     background: #219150;
+  }
+
+  /* Extra tweaks for very small screens */
+  @media (max-width: 480px) {
+    .home-content {
+      padding: 20px;
+    }
+    .order-btn {
+      width: 100%;
+      display: block;
+    }
   }
 </style>
 </head>
