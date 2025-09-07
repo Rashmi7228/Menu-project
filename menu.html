@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Hotel - Menu</title>
+<link rel="stylesheet" href="menu-style.css">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="hotel-name">🍽️ My Hotel</div>
+<nav class="nav-links">
+  <a href="index.html" class="home-btn">Home</a>
+  <button type="submit" form="menuForm" class="order-btn">Place Order</button>
+</nav>
+
+
+</header>
+
+<main>
+<form action="order.html" method="get" id="menuForm">
+    <!-- Breakfast -->
+    <section id="breakfast" class="category-section">
+        <h2>Breakfast</h2>
+        <div class="items-container">
+            <div class="dish"><span>Idli - ₹20</span><input type="number" name="Idli" min="0" max="10" value="0"></div>
+            <div class="dish"><span>Dosa - ₹40</span><input type="number" name="Dosa" min="0" max="10" value="0"></div>
+            <div class="dish"><span>Poori with Bhaji - ₹50</span><input type="number" name="Poori_with_Bhaji" min="0" max="10" value="0"></div>
+            <div class="dish"><span>Upma - ₹35</span><input type="number" name="Upma" min="0" max="10" value="0"></div>
+            <div class="dish"><span>Pongal - ₹45</span><input type="number" name="Pongal" min="0" max="10" value="0"></div>
+            <div class="dish"><span>Vegetable Sandwich - ₹40</span><input type="number" name="Vegetable_Sandwich" min="0" max="10" value="0"></div>
+        </div>
+    </section>
+
+    <!-- Lunch -->
+    <section id="lunch" class="category-section">
+        <h2>Lunch</h2>
+        <div class="items-container">
+            <div class="dish"><span>Veg Biryani - ₹120</span><input type="number" name="Veg_Biryani" min="0" max="10" value="0"></div>
+            <div class="dish"><span>Paneer Butter Masala - ₹150</span><input type="number" name="Paneer_Butter_Masala" min="0" max="10" value="0"></div>
+            <div class="dish"><span>Dal Tadka - ₹90</span><input type="number" name="Dal_Tadka" min="0" max="10" value="0"></div>
+            <div class="dish"><span>Aloo Gobi - ₹100</span><input type="number" name="Aloo_Gobi" min="0" max="10" value="0"></div>
+            <div class="dish"><span>Veg Thali - ₹180</span><input type="number" name="Veg_Thali" min="0" max="10" value="0"></div>
+            <div class="dish"><span>Chole Bhature - ₹120</span><input type="number" name="Chole_Bhature" min="0" max="10" value="0"></div>
+        </div>
+    </section>
+
+    <!-- Snacks -->
+    <section id="snacks" class="category-section">
+        <h2>Snacks</h2>
+        <div class="items-container">
+            <div class="dish"><span>Samosa - ₹20</span><input type="number" name="Samosa" min="0" max="10" value="0"></div>
+            <div class="dish"><span>Paneer Pakora - ₹25</span><input type="number" name="Paneer_Pakora" min="0" max="10" value="0"></div>
+            <div class="dish"><span>Veg Sandwich - ₹40</span><input type="number" name="Veg_Sandwich" min="0" max="10" value="0"></div>
+            <div class="dish"><span>Cutlet - ₹30</span><input type="number" name="Cutlet" min="0" max="10" value="0"></div>
+            <div class="dish"><span>Bhel Puri - ₹35</span><input type="number" name="Bhel_Puri" min="0" max="10" value="0"></div>
+            <div class="dish"><span>Pani Puri - ₹30</span><input type="number" name="Pani_Puri" min="0" max="10" value="0"></div>
+        </div>
+    </section>
+
+    <!-- Beverages -->
+    <section id="beverages" class="category-section">
+        <h2>Beverages</h2>
+        <div class="items-container">
+            <div class="dish"><span>Buttermilk - ₹25</span><input type="number" name="Buttermilk" min="0" max="10" value="0"></div>
+            <div class="dish"><span>Lassi - ₹40</span><input type="number" name="Lassi" min="0" max="10" value="0"></div>
+            <div class="dish"><span>Masala Chai - ₹20</span><input type="number" name="Masala_Chai" min="0" max="10" value="0"></div>
+            <div class="dish"><span>Lemon Tea - ₹25</span><input type="number" name="Lemon_Tea" min="0" max="10" value="0"></div>
+            <div class="dish"><span>Green Tea - ₹30</span><input type="number" name="Green_Tea" min="0" max="10" value="0"></div>
+            <div class="dish"><span>Cold Coffee - ₹50</span><input type="number" name="Cold_Coffee" min="0" max="10" value="0"></div>
+        </div>
+    </section>
+
+    <!-- Juices -->
+    <section id="juices" class="category-section">
+        <h2>Juices</h2>
+        <div class="items-container">
+            <div class="dish"><span>Orange Juice - ₹30</span><input type="number" name="Orange_Juice" min="0" max="10" value="0"></div>
+            <div class="dish"><span>Apple Juice - ₹30</span><input type="number" name="Apple_Juice" min="0" max="10" value="0"></div>
+            <div class="dish"><span>Pineapple Juice - ₹35</span><input type="number" name="Pineapple_Juice" min="0" max="10" value="0"></div>
+            <div class="dish"><span>Watermelon Juice - ₹30</span><input type="number" name="Watermelon_Juice" min="0" max="10" value="0"></div>
+            <div class="dish"><span>Mosambi Juice - ₹30</span><input type="number" name="Mosambi_Juice" min="0" max="10" value="0"></div>
+            <div class="dish"><span>Mango Juice - ₹35</span><input type="number" name="Mango_Juice" min="0" max="10" value="0"></div>
+        </div>
+    </section>
+
+    <!-- Desserts -->
+    <section id="desserts" class="category-section">
+        <h2>Desserts</h2>
+        <div class="items-container">
+            <div class="dish"><span>Ice Cream - ₹60</span><input type="number" name="Ice_Cream" min="0" max="10" value="0"></div>
+            <div class="dish"><span>Brownie - ₹70</span><input type="number" name="Brownie" min="0" max="10" value="0"></div>
+            <div class="dish"><span>Gulab Jamun - ₹50</span><input type="number" name="Gulab_Jamun" min="0" max="10" value="0"></div>
+            <div class="dish"><span>Rasgulla - ₹45</span><input type="number" name="Rasgulla" min="0" max="10" value="0"></div>
+            <div class="dish"><span>Kaju Katli - ₹80</span><input type="number" name="Kaju_Katli" min="0" max="10" value="0"></div>
+            <div class="dish"><span>Carrot Halwa - ₹90</span><input type="number" name="Carrot_Halwa" min="0" max="10" value="0"></div>
+        </div>
+    </section>
+
+</form>
+</main>
+</body>
+</html>

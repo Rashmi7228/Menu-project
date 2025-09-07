@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #a1c4fd, #c2e9fb);
+    text-align: center;
+    padding: 50px;
+  }
+  .payment-box {
+    background: #fff;
+    padding: 30px;
+    border-radius: 20px;
+    display: inline-block;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  }
+  h1 { color: #2c3e50; }
+  h2 { color: #e74c3c; margin-bottom: 25px; }
+  .pay-option {
+    margin: 20px;
+    padding: 15px;
+    font-size: 18px;
+    background: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  .pay-option:hover { background: #219150; }
+  img { margin-top: 20px; width: 200px; display: none; }
+</style>
+</head>
+<body>
+
+<div class="payment-box">
+  <h1>💳 Select Payment Method</h1>
+  <!-- Show total amount here -->
+  <h2 id="amountDisplay">Amount: ₹0</h2>
+
+  <button class="pay-option" onclick="payQR()">Pay via QR Code</button>
+  <button class="pay-option" onclick="payCash()">Cash</button>
+  <br>
+  <img id="qrCode" src="QR code.png" alt="QR Code">
+  <audio id="beep" src="beep.mp3"></audio>
+</div>
+
+<script>
+  // Function to extract query parameters
+  function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+  }
+
+  // Display the amount
+  const totalAmount = getQueryParam("amount"); 
+  if (totalAmount) {
+    document.getElementById("amountDisplay").textContent = "Amount: ₹" + totalAmount;
+  }
+
+  function payQR() {
+    document.getElementById("qrCode").style.display = "block";
+  }
+  function payCash() {
+    document.getElementById("beep").play();
+    alert("Please pay cash at the counter 💵");
+  }
+</script>
+
+</body>
+</html>

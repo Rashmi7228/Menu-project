@@ -1,0 +1,102 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to bottom, #fdfbfb, #ebedee);
+}
+
+.navbar {
+  position: sticky;
+  top: 0;
+  background: linear-gradient(to right, #43cea2, #185a9d);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  color: white;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+.navbar .hotel-name {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.category-section {
+  padding: 25px;
+  margin: 20px auto;
+  max-width: 900px;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #f6d365, #fda085);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.dish {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  margin-bottom: 10px;
+  background: rgba(255,255,255,0.7);
+  border-radius: 10px;
+}
+
+.order-btn {
+  padding: 12px 28px;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(45deg, #ff6a00, #ee0979);
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.order-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+
+.home-btn {
+  padding: 10px 20px;
+  background-color: #ff9800;  /* Choose any color you like */
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.home-btn:hover {
+  background-color: #e68900;
+  transform: scale(1.05);
+}
+
+
+.items-container {
+  display: flex;
+  flex-wrap: wrap;      /* allows dishes to wrap to next line */
+  gap: 15px;            /* space between dishes */
+}
+
+.dish {
+  flex: 1 1 calc(50% - 15px);  /* take roughly 50% width minus gap */
+  box-sizing: border-box;       /* include padding/border in width */
+}
+
+.dish input[type="number"] {
+  width: 60px;                /* adjust width */
+  padding: 8px;               /* inner spacing */
+  border-radius: 12px;        /* rounded corners */
+  border: 2px solid #ff9800;  /* cute colored border */
+  text-align: center;          /* center the number */
+  font-weight: bold;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.dish input[type="number"]:focus {
+  border-color: #e68900;      /* darker border on focus */
+  box-shadow: 0 0 5px rgba(255,152,0,0.5);
+}
